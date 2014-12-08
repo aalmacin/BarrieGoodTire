@@ -12,3 +12,11 @@
 */
 
 Route::get('/', array('uses'=>'HomeController@index'));
+
+Route::get('login', array('uses' => 'AdminController@showLogin'));
+
+Route::post('login', array('before' => 'csrf', 'uses' => 'AdminController@doLogin'));
+
+Route::get('admin', array('before' => 'auth', 'uses' => 'AdminController@showAdmin'));
+
+Route::get('logout', array('uses' => 'AdminController@doLogout'));
