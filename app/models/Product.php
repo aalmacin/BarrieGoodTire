@@ -9,6 +9,7 @@ class Product extends Eloquent {
       foreach($tires as $tire) {
         $new_tire = array();
         // Product
+        $new_tire['id'] = $product->id;
         $new_tire['price'] = $product->price;
         $new_tire['original_price'] = $product->original_price;
         $new_tire['image'] = $product->image;
@@ -33,6 +34,7 @@ class Product extends Eloquent {
       foreach($rims as $rim) {
         $new_rim = array();
         // Product
+        $new_rim['id'] = $product->id;
         $new_rim['price'] = $product->price;
         $new_rim['original_price'] = $product->original_price;
         $new_rim['image'] = $product->image;
@@ -50,11 +52,43 @@ class Product extends Eloquent {
   public static function scopeAllProducts() {
     $tires = self::scopeAllTires();
     $rims = self::scopeAllRims();
-    $all = array(
+    return array(
       'tires' => $tires,
       'rims' => $rims,
     );
-    return $all;
+  }
+
+  public static function findProduct($id) {
+    $product = Product::find($id);
+    if($product == null) {
+      App::abort(404);
+    }
+    $tire = $product->tires()->first();
+    $rim = $product->rims()->first();
+    if($rim != null) {
+      $new_rim = array('type' => 'rim');
+      $new_rim['price'] = $product->price;
+      $new_rim['original_price'] = $product->original_price;
+      $new_rim['image'] = $product->image;
+      $new_rim['quantity'] = $product->quantity;
+      // Rim
+      $new_rim['material'] = $rim->material;
+      $new_rim['size'] = $rim->size;
+      $new_rim['bolt_pattern'] = $rim->bolt_pattern;
+      return $new_rim;
+    } else {
+      $new_tire = array('type' => 'tire');
+      $new_tire['price'] = $product->price;
+      $new_tire['original_price'] = $product->original_price;
+      $new_tire['image'] = $product->image;
+      $new_tire['quantity'] = $product->quantity;
+      // Tire
+      $new_tire['brand_name'] = $tire->brand_name;
+      $new_tire['description'] = $tire->description;
+      $new_tire['size'] = $tire->size;
+      $new_tire['model'] = $tire->model;
+      return $new_tire;
+    }
   }
 
   public function tires() {

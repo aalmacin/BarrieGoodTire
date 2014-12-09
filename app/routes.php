@@ -20,3 +20,7 @@ Route::post('login', array('before' => 'csrf', 'uses' => 'AdminController@doLogi
 Route::get('admin', array('before' => 'auth', 'uses' => 'AdminController@showAdmin'));
 
 Route::get('logout', array('uses' => 'AdminController@doLogout'));
+
+Route::group(array('before'=>'auth'), function() {
+  Route::resource('products', 'ProductController');
+});

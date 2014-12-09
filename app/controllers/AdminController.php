@@ -18,7 +18,7 @@ class AdminController extends BaseController {
   public function showAdmin()
   {
     $all = Product::scopeAllProducts();
-    return View::make('admin', array(
+    return View::make('admin.index', array(
       'tires' => $all['tires'],
       'rims' => $all['rims'],
     ));
@@ -26,7 +26,7 @@ class AdminController extends BaseController {
 
   public function showLogin()
   {
-    return View::make('login');
+    return View::make('admin.login');
   }
 
   public function doLogin()
@@ -39,7 +39,7 @@ class AdminController extends BaseController {
     $validator = Validator::make(Input::all(), $rules);
 
     if ($validator->fails()) {
-      return Redirect::to('login')
+      return Redirect::to('admin.login')
       ->withErrors($validator)
       ->withInput(Input::except('password'));
     } else {
@@ -49,9 +49,9 @@ class AdminController extends BaseController {
       );
 
       if (Auth::attempt($userdata)) {
-        return Redirect::to('admin');
+        return Redirect::to('admin.index');
       } else {
-        return Redirect::to('login');
+        return Redirect::to('admin.login');
       }
     }
   }
@@ -60,7 +60,7 @@ class AdminController extends BaseController {
   public function doLogout()
   {
     Auth::logout();
-    return Redirect::to('login');
+    return Redirect::to('admin.login');
   }
 
 }
