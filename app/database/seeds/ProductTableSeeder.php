@@ -10,16 +10,10 @@ class ProductTableSeeder extends Seeder
     DB::table('products')->delete();
 
     Product::create(array(
+      'id' => 1,
       'price'     => 100.00,
       'original_price' => 50.00,
       'image' => URL::asset('images/bfgoodrich1.jpg'),
-      'quantity' => 4,
-    ));
-
-    Product::create(array(
-      'price'     => 200.00,
-      'original_price' => 100.00,
-      'image' => URL::asset('images/bfgoodrich.jpg'),
       'quantity' => 4,
     ));
 
@@ -30,6 +24,14 @@ class ProductTableSeeder extends Seeder
       'product_id' => 1,
     ));
 
+    Product::create(array(
+      'id' => 2,
+      'price'     => 200.00,
+      'original_price' => 100.00,
+      'image' => URL::asset('images/bfgoodrich.jpg'),
+      'quantity' => 4,
+    ));
+
     Tire::create(array(
       'brand_name'     => 'Goodrich',
       'description' => 'Very good tire',
@@ -37,6 +39,38 @@ class ProductTableSeeder extends Seeder
       'model' => '2006',
       'product_id' => 2,
       'rim_id' => 1,
+    ));
+
+    Product::create(array(
+      'id' => 3,
+      'price'     => 150.00,
+      'original_price' => 100.00,
+      'image' => URL::asset('images/dynapro.jpg'),
+      'quantity' => 7,
+    ));
+
+    Tire::create(array(
+      'brand_name'     => 'Dynapro',
+      'description' => 'Very good tire. 98% Thread',
+      'size' => '16',
+      'model' => '2009',
+      'product_id' => 3,
+      'rim_id' => null,
+    ));
+
+    Product::create(array(
+      'id' => 4,
+      'price'     => 200.00,
+      'original_price' => 150.00,
+      'image' => URL::asset('images/dynapro1.jpg'),
+      'quantity' => 3,
+    ));
+
+    Rim::create(array(
+      'material'     => 'alloy',
+      'size' => '19',
+      'bolt_pattern' => '6',
+      'product_id' => 4,
     ));
   }
 

@@ -52,7 +52,7 @@ class CreateProducts extends Migration {
 				->on('products')
 				->onDelete('cascade');
 
-			$table->integer('rim_id')->unsigned();
+			$table->integer('rim_id')->unsigned()->nullable();
 			$table->foreign('rim_id')
 				->references('id')
 				->on('rims')
@@ -70,9 +70,9 @@ class CreateProducts extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('products');
-		Schema::drop('rims');
 		Schema::drop('tires');
+		Schema::drop('rims');
+		Schema::drop('products');
 	}
 
 }
