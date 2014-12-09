@@ -17,7 +17,11 @@ class AdminController extends BaseController {
 
   public function showAdmin()
   {
-    return View::make('admin');
+    $all = Product::scopeAllProducts();
+    return View::make('admin', array(
+      'tires' => $all['tires'],
+      'rims' => $all['rims'],
+    ));
   }
 
   public function showLogin()

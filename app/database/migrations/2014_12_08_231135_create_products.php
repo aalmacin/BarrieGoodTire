@@ -70,9 +70,9 @@ class CreateProducts extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tires');
-		Schema::drop('rims');
 		Schema::drop('products');
+		Schema::drop('rims');
+		Schema::drop('tires');
 	}
 
 }
