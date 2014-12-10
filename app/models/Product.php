@@ -239,7 +239,7 @@ class Product extends Eloquent {
     }
 
     $images = $fields['images'];
-    if(count($images) > 0) {
+    if(count($images[0]) > 0) {
       self::saveImages($images, $product->id);
     }
   }
@@ -317,8 +317,9 @@ class Product extends Eloquent {
     }
 
     $destination = $destinationPath.$hash_name;
+    $wholePath = "public/$destination";
     // Save Image
-    $img->save($destination);
+    $img->save($wholePath);
     return $destination;
   }
 }

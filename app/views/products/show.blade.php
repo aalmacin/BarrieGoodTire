@@ -3,6 +3,13 @@
 Product
 @stop
 @section('content')
+<div id="images">
+  <ul>
+    @foreach($images as $image)
+      <li>{{ HTML::image(asset($image->thumb)) }}</li>
+    @endforeach
+</ul>
+</div>
 @if($product['type'] == 'rim')
   <h2>Rim</h2>
   <p>Quantity: {{ $product['quantity'] }}</p>
