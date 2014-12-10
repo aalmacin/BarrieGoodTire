@@ -2,15 +2,16 @@
 
 class ProductController extends \BaseController {
 
+
 	/**
 	* Instantiate a new ProductController instance.
 	*/
 	public function __construct()
 	{
-		$this->beforeFilter('@checkReader');
+		$this->beforeFilter('@checkRole');
 	}
 
-	public function checkReader() {
+	public function checkRole() {
 		if(Auth::user()->role != 'accounting' && Auth::user()->role != 'admin') {
 			App::abort(404);
 		}
@@ -30,7 +31,6 @@ class ProductController extends \BaseController {
 		));
 	}
 
-
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -49,123 +49,17 @@ class ProductController extends \BaseController {
 	 */
 	public function store()
 	{
-		$all = Input::all();
-
-		$rules = array(
-			'price' => 'required',
-			'original_price' => 'required',
-			'quantity' => 'required',
+		$fields = Input::all();
+		return Product::validateFields(
+			$fields,
+			array(
+				'product' => new Product,
+				'rim' => new Rim,
+				'tire' => new Tire
+			),
+			'products/create',
+			'products'
 		);
-
-		$type = $all['type'];
-		switch($type) {
-			case 'rim':
-				// Rim
-				$rules['rim_material'] = 'required';
-				$rules['rim_size'] = 'required';
-				$rules['rim_bolt_pattern'] = 'required';
-			break;
-			case 'tire':
-				// Tire
-				$rules['tire_brand_name'] = 'required';
-				$rules['tire_description'] = 'required';
-				$rules['tire_size'] = 'required';
-				$rules['tire_model'] = 'required';
-			break;
-		}
-
-		$validator = Validator::make($all, $rules);
-
-		$images = $all['images'];
-		foreach($images as $file) {
-			$rules = array(
-				'file' => 'mimes:png,gif,jpeg,jpg|max:20000'
-			);
-			$imagevalidator = Validator::make(array('file'=> $file), $rules);
-
-			if($imagevalidator->fails()){
-				return Redirect::to('products/create')
-				->withErrors($imagevalidator);
-			}
-		}
-
-		if($validator->fails()) {
-			return Redirect::to('products/create')
-				->withErrors($validator);
-		} else {
-			$product = new Product;
-			$product->price = $all['price'];
-			$product->original_price = $all['original_price'];
-			$product->quantity = $all['quantity'];
-			$product->save();
-			switch($type) {
-				case 'rim':
-				$rim = new Rim;
-				$rim->material = $all['rim_material'];
-				$rim->size = $all['rim_size'];
-				$rim->bolt_pattern = $all['rim_bolt_pattern'];
-				$rim->product_id = $product->id;
-				$rim->save();
-				break;
-				case 'tire':
-				$tire = new Tire;
-				$tire->brand_name = $all['tire_brand_name'];
-				$tire->description = $all['tire_description'];
-				$tire->size = $all['tire_size'];
-				$tire->model = $all['tire_model'];
-				$tire->product_id = $product->id;
-				$tire->save();
-				break;
-			}
-
-			foreach($images as $file) {
-				$img = Image::make($file->getRealPath());
-
-				// Get hash name
-				$ext      = $file->guessClientExtension();
-				$fullname = $file->getClientOriginalName();
-				$hash_name = date('d.m.Y.H.i.s').'-'.md5($fullname).'.'.$ext;
-
-				// Save images
-				$original = $this->saveImage($img, $hash_name, 'original');
-				$image = $this->saveImage($img, $hash_name, 'image');
-				$thumb = $this->saveImage($img, $hash_name, 'thumb');
-
-				// Create the product image record
-				$product_image = new ProductImage;
-				$product_image->product_id = $product->id;
-
-				$product_image->original = $original;
-				$product_image->path = $image;
-				$product_image->thumb = $thumb;
-
-				$product_image->save();
-			}
-			Session::flash('message', 'Successfully created product!');
-			return Redirect::to('products');
-		}
-	}
-
-	private function saveImage($img, $hash_name, $type) {
-		$destinationPath = "uploads/$type/$type.";
-
-		switch($type) {
-			case 'thumb':
-				$thumb_width = $img->width() / 4;
-				$thumb_height = $img->height() / 4;
-				$img->resize($thumb_width, $thumb_height);
-			break;
-			case 'image':
-				$width = $img->width() / 2;
-				$height = $img->height() / 2;
-				$img->resize($width, $height);
-			break;
-		}
-
-		$destination = $destinationPath.$hash_name;
-		// Save Image
-		$img->save($destination);
-		return $destination;
 	}
 
 
@@ -239,11 +133,7 @@ class ProductController extends \BaseController {
 
 		$all = Input::all();
 
-		$rules = array(
-			'price' => 'required',
-			'original_price' => 'required',
-			'quantity' => 'required',
-		);
+		$rules = $this->getProductRules();
 
 		$type = $all['type'];
 		switch($type) {

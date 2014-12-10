@@ -15,7 +15,7 @@ class CreateProductImages extends Migration {
 		Schema::create('product_images', function($table)
 		{
 			$table->increments('id');
-			$table->string('original');
+			$table->string('orig');
 			$table->string('path');
 			$table->string('thumb');
 
