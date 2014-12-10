@@ -14,6 +14,7 @@ Products Page
     <th>Original Price</th>
     <th>Price</th>
     <th>Show</th>
+    <th>Edit</th>
   </tr>
   @foreach($tires as $tire)
   <tr>
@@ -25,6 +26,7 @@ Products Page
     <td>{{ $tire['original_price'] }}</td>
     <td><strong>{{ $tire['price'] }}</strong></td>
     <td>{{ link_to('products/'.$tire['id'], 'Show') }}</td>
+    <td>{{ link_to('products/'.$tire['id'].'/edit/', 'Edit') }}</td>
   </tr>
   @endforeach
 </table>
@@ -38,6 +40,7 @@ Products Page
     <th>Original Price</th>
     <th>Price</th>
     <th>Show</th>
+    <th>Edit</th>
   </tr>
   @foreach($rims as $rim)
   <tr>
@@ -48,6 +51,7 @@ Products Page
     <td>{{ $rim['original_price'] }}</td>
     <td><strong>{{ $rim['price'] }}</strong></td>
     <td>{{ link_to('products/'.$rim['id'], 'Show') }}</td>
+    <td>{{ link_to('products/'.$rim['id'].'/edit/', 'Edit') }}</td>
   </tr>
   @endforeach
 </table>

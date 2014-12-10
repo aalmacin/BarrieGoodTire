@@ -134,7 +134,37 @@ class ProductController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$product = Product::find($id);
+		$rim_data = array();
+		$tire_data = array();
+
+		$tire_data['tire_brand_name'] = '';
+		$tire_data['tire_size'] = '';
+		$tire_data['tire_description'] = '';
+		$tire_data['tire_model'] = '';
+		$rim_data['rim_material'] = '';
+		$rim_data['rim_size'] = '';
+		$rim_data['rim_bolt_pattern'] = '';
+
+		$tire = $product->tires()->first();
+		$rim = $product->rims()->first();
+
+		if(count($tire) > 0) {
+			$tire_data['tire_brand_name'] = $tire->brand_name;
+			$tire_data['tire_size'] = $tire->size;
+			$tire_data['tire_description'] = $tire->description;
+			$tire_data['tire_model'] = $tire->model;
+		} else if(count($rim) > 0) {
+			$rim_data['rim_material'] = $rim->material;
+			$rim_data['rim_size'] = $rim->size;
+			$rim_data['rim_bolt_pattern'] = $rim->bolt_pattern;
+		}
+
+		return View::make('products.edit', array(
+			'tire_data' => $tire_data,
+			'rim_data' => $rim_data,
+		))
+			->with('product', $product);
 	}
 
 
@@ -158,7 +188,18 @@ class ProductController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$product = Product::find($id);
+		$tires = $product->tires();
+		$rims = $product->rims();
+		foreach($tires as $tire) {
+			$tire->delete();
+		}
+		foreach($rims as $rim) {
+			$rim->delete();
+		}
+		$product->delete();
+		Session::flash('message', 'Successfully deleted!');
+		return Redirect::to('products');
 	}
 
 

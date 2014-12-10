@@ -17,7 +17,7 @@ class BaseController extends Controller {
 
 	protected static function dumper($var) {
 		echo "<pre>";
-		var_dump($var);
+		print_r($var);
 		echo "</pre>";
 	}
 

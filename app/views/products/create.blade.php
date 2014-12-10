@@ -39,7 +39,7 @@ Create Product
       </div>
       <div>
         {{ Form::label('tire_description', 'Description') }}
-        {{ Form::text('tire_description') }}
+        {{ Form::textarea('tire_description') }}
       </div>
       <div>
         {{ Form::label('tire_model', 'Model') }}
