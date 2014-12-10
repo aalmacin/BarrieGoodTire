@@ -12,7 +12,14 @@ class Product extends Eloquent {
         $new_tire['id'] = $product->id;
         $new_tire['price'] = $product->price;
         $new_tire['original_price'] = $product->original_price;
-        $new_tire['image'] = $product->image;
+        $new_tire['images'] = array();
+        foreach($product->images() as $image) {
+          $new_tire['images'][] = array(
+            'original' => $image->original,
+            'image' => $image->path,
+            'thumb' => $image->thumb,
+          );
+        }
         $new_tire['quantity'] = $product->quantity;
         // Tire
         $new_tire['brand_name'] = $tire->brand_name;
@@ -37,7 +44,14 @@ class Product extends Eloquent {
         $new_rim['id'] = $product->id;
         $new_rim['price'] = $product->price;
         $new_rim['original_price'] = $product->original_price;
-        $new_rim['image'] = $product->image;
+        $new_rim['images'] = array();
+        foreach($product->images() as $image) {
+          $new_rim['images'][] = array(
+            'original' => $image->original,
+            'image' => $image->path,
+            'thumb' => $image->thumb,
+          );
+        }
         $new_rim['quantity'] = $product->quantity;
         // Rim
         $new_rim['material'] = $rim->material;
@@ -69,7 +83,14 @@ class Product extends Eloquent {
       $new_rim = array('type' => 'rim');
       $new_rim['price'] = $product->price;
       $new_rim['original_price'] = $product->original_price;
-      $new_rim['image'] = $product->image;
+      $new_rim['images'] = array();
+      foreach($product->images() as $image) {
+        $new_rim['images'][] = array(
+          'original' => $image->original,
+          'image' => $image->path,
+          'thumb' => $image->thumb,
+        );
+      }
       $new_rim['quantity'] = $product->quantity;
       // Rim
       $new_rim['material'] = $rim->material;
@@ -80,7 +101,14 @@ class Product extends Eloquent {
       $new_tire = array('type' => 'tire');
       $new_tire['price'] = $product->price;
       $new_tire['original_price'] = $product->original_price;
-      $new_tire['image'] = $product->image;
+      $new_tire['images'] = array();
+      foreach($product->images() as $image) {
+        $new_tire['images'][] = array(
+          'original' => $image->original,
+          'image' => $image->path,
+          'thumb' => $image->thumb,
+        );
+      }
       $new_tire['quantity'] = $product->quantity;
       // Tire
       $new_tire['brand_name'] = $tire->brand_name;
@@ -97,5 +125,9 @@ class Product extends Eloquent {
 
   public function rims() {
     return $this->hasMany('Rim');
+  }
+
+  public function images() {
+    return $this->hasMany('ProductImage');
   }
 }

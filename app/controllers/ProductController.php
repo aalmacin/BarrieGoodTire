@@ -119,15 +119,53 @@ class ProductController extends \BaseController {
 			}
 
 			foreach($images as $file) {
-				$destinationPath = 'uploads';
+				$img = Image::make($file->getRealPath());
+
+				// Get hash name
 				$ext      = $file->guessClientExtension();
 				$fullname = $file->getClientOriginalName();
-				$hashname = date('d.m.Y.H.i.s').'-'.md5($fullname).'.'.$ext;
-				$upload_success = $file->move($destinationPath, $hashname);
+				$hash_name = date('d.m.Y.H.i.s').'-'.md5($fullname).'.'.$ext;
+
+				// Save images
+				$original = $this->saveImage($img, $hash_name, 'original');
+				$image = $this->saveImage($img, $hash_name, 'image');
+				$thumb = $this->saveImage($img, $hash_name, 'thumb');
+
+				// Create the product image record
+				$product_image = new ProductImage;
+				$product_image->product_id = $product->id;
+
+				$product_image->original = $original;
+				$product_image->path = $image;
+				$product_image->thumb = $thumb;
+
+				$product_image->save();
 			}
 			Session::flash('message', 'Successfully created product!');
 			return Redirect::to('products');
 		}
+	}
+
+	private function saveImage($img, $hash_name, $type) {
+		$destinationPath = "uploads/$type/$type.";
+
+		switch($type) {
+			case 'thumb':
+				$thumb_width = $img->width() / 4;
+				$thumb_height = $img->height() / 4;
+				$img->resize($thumb_width, $thumb_height);
+			break;
+			case 'image':
+				$width = $img->width() / 2;
+				$height = $img->height() / 2;
+				$img->resize($width, $height);
+			break;
+		}
+
+		$destination = $destinationPath.$hash_name;
+		// Save Image
+		$img->save($destination);
+		return $destination;
 	}
 
 
@@ -271,12 +309,18 @@ class ProductController extends \BaseController {
 		$product = Product::find($id);
 		$tires = $product->tires();
 		$rims = $product->rims();
+		$images = $product->product_images();
+
 		foreach($tires as $tire) {
 			$tire->delete();
 		}
 		foreach($rims as $rim) {
 			$rim->delete();
 		}
+		foreach($images as $image) {
+			$image->delete();
+		}
+
 		$product->delete();
 		Session::flash('message', 'Successfully deleted!');
 		return Redirect::to('products');
