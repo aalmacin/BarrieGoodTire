@@ -146,6 +146,7 @@ class ProductController extends \BaseController {
 		$rim_data['rim_size'] = '';
 		$rim_data['rim_bolt_pattern'] = '';
 
+		if($product == null) App::abort('404');
 		$tire = $product->tires()->first();
 		$rim = $product->rims()->first();
 
