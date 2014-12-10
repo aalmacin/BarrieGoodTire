@@ -51,4 +51,6 @@ Products Page
   </tr>
   @endforeach
 </table>
+
+<p>{{ link_to('products/create', 'New Product') }}</p>
 @stop

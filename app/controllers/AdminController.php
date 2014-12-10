@@ -39,7 +39,7 @@ class AdminController extends BaseController {
     $validator = Validator::make(Input::all(), $rules);
 
     if ($validator->fails()) {
-      return Redirect::to('admin.login')
+      return Redirect::to('login')
       ->withErrors($validator)
       ->withInput(Input::except('password'));
     } else {
@@ -49,9 +49,10 @@ class AdminController extends BaseController {
       );
 
       if (Auth::attempt($userdata)) {
-        return Redirect::to('admin.index');
+        return Redirect::to('admin');
       } else {
-        return Redirect::to('admin.login');
+        Session::flash('error', 'Username and password did not match');
+        return Redirect::to('login');
       }
     }
   }
@@ -60,7 +61,7 @@ class AdminController extends BaseController {
   public function doLogout()
   {
     Auth::logout();
-    return Redirect::to('admin.login');
+    return Redirect::to('login');
   }
 
 }
