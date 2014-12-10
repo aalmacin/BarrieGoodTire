@@ -5,7 +5,7 @@ Create Product
 @section('content')
   {{ HTML::ul($errors->all) }}
 
-  {{ Form::open(array('url' => 'products')) }}
+  {{ Form::open(array('url' => 'products', 'method' => 'POST', 'files' => true)) }}
     <div>
       {{ Form::label('price', 'Price') }}
       {{ Form::text('price') }}

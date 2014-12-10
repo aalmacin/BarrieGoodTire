@@ -16,7 +16,6 @@ class CreateProducts extends Migration {
 			$table->increments('id');
 			$table->decimal('price');
 			$table->decimal('original_price');
-			$table->string('image')->nullable();
 			$table->integer('quantity');
 
 			$table->timestamps();

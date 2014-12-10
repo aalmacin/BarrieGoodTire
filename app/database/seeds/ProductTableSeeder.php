@@ -13,7 +13,6 @@ class ProductTableSeeder extends Seeder
       'id' => 1,
       'price'     => 100.00,
       'original_price' => 50.00,
-      'image' => URL::asset('images/bfgoodrich1.jpg'),
       'quantity' => 4,
     ));
 
@@ -28,7 +27,6 @@ class ProductTableSeeder extends Seeder
       'id' => 2,
       'price'     => 200.00,
       'original_price' => 100.00,
-      'image' => URL::asset('images/bfgoodrich.jpg'),
       'quantity' => 4,
     ));
 
@@ -45,7 +43,6 @@ class ProductTableSeeder extends Seeder
       'id' => 3,
       'price'     => 150.00,
       'original_price' => 100.00,
-      'image' => URL::asset('images/dynapro.jpg'),
       'quantity' => 7,
     ));
 
@@ -62,7 +59,6 @@ class ProductTableSeeder extends Seeder
       'id' => 4,
       'price'     => 200.00,
       'original_price' => 150.00,
-      'image' => URL::asset('images/dynapro1.jpg'),
       'quantity' => 3,
     ));
 

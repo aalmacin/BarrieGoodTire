@@ -5,7 +5,7 @@ Edit Product
 @section('content')
 {{ HTML::ul($errors->all) }}
 
-{{ Form::model($product, array('route' => array('products.update', $product->id), 'method' => 'PUT')) }}
+{{ Form::model($product, array('route' => array('products.update', $product->id), 'method' => 'PUT', 'files' => true)) }}
 <div>
   {{ Form::label('price', 'Price') }}
   {{ Form::text('price') }}
