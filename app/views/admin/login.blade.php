@@ -6,7 +6,7 @@ Administrator Login
   {{ Form::open(array('url' => 'login')) }}
     <h1>Login</h1>
     <p>
-      {{ $errors->first('email') }}
+      {{ $errors->first('username') }}
       {{ $errors->first('password') }}
     </p>
 

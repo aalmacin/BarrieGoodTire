@@ -3,9 +3,20 @@
 Create Product
 @stop
 @section('content')
-  {{ HTML::ul($errors->all) }}
 
   {{ Form::open(array('url' => 'products', 'method' => 'POST', 'files' => true)) }}
+    <ul>
+      @if ($errors->has())
+
+      @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach
+
+      @endif
+    </ul>
+    <div>
+      {{ Form::file('images[]', array('multiple'=>true)) }}
+    </div>
     <div>
       {{ Form::label('price', 'Price') }}
       {{ Form::text('price') }}
@@ -18,10 +29,6 @@ Create Product
       {{ Form::label('quantity', 'Quantity') }}
       {{ Form::text('quantity') }}
     </div>
-    <!-- <div>
-      {{ Form::label('') }}
-      {{ Form::text('') }}
-    </div> -->
     <div>
       {{ Form::label('type', 'Type') }}
       {{ Form::select('type', array('tire' => 'Tire', 'rim' => 'Rim')) }}
@@ -65,4 +72,5 @@ Create Product
       {{ Form::submit('Submit') }}
     </div>
   {{ Form::close() }}
+  <p>{{ link_to('products/', 'Back to Products') }}</p>
 @stop

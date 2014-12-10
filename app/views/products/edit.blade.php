@@ -3,9 +3,20 @@
 Edit Product
 @stop
 @section('content')
-{{ HTML::ul($errors->all) }}
 
 {{ Form::model($product, array('route' => array('products.update', $product->id), 'method' => 'PUT', 'files' => true)) }}
+  <ul>
+    @if ($errors->has())
+
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+
+    @endif
+  </ul>
+<div>
+  {{ Form::file('images[]', array('multiple'=>true)) }}
+</div>
 <div>
   {{ Form::label('price', 'Price') }}
   {{ Form::text('price') }}
@@ -72,4 +83,5 @@ Edit Product
 {{ Form::hidden('_method', 'DELETE') }}
 <td>{{ Form::submit('Delete') }}</td>
 {{ Form::close() }}
+<p>{{ link_to('products/', 'Back to Products') }}</p>
 @stop

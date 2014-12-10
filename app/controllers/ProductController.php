@@ -76,6 +76,19 @@ class ProductController extends \BaseController {
 
 		$validator = Validator::make($all, $rules);
 
+		$images = $all['images'];
+		foreach($images as $file) {
+			$rules = array(
+				'file' => 'mimes:png,gif,jpeg,jpg|max:20000'
+			);
+			$imagevalidator = Validator::make(array('file'=> $file), $rules);
+
+			if($imagevalidator->fails()){
+				return Redirect::to('products/create')
+				->withErrors($imagevalidator);
+			}
+		}
+
 		if($validator->fails()) {
 			return Redirect::to('products/create')
 				->withErrors($validator);
@@ -104,9 +117,17 @@ class ProductController extends \BaseController {
 				$tire->save();
 				break;
 			}
+
+			foreach($images as $file) {
+				$destinationPath = 'uploads';
+				$ext      = $file->guessClientExtension();
+				$fullname = $file->getClientOriginalName();
+				$hashname = date('d.m.Y.H.i.s').'-'.md5($fullname).'.'.$ext;
+				$upload_success = $file->move($destinationPath, $hashname);
+			}
+			Session::flash('message', 'Successfully created product!');
+			return Redirect::to('products');
 		}
-		Session::flash('message', 'Successfully created product!');
-		return Redirect::to('products');
 	}
 
 
