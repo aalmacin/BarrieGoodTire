@@ -105,20 +105,25 @@ class ProductController extends \BaseController {
 		$tire = $product->tires()->first();
 		$rim = $product->rims()->first();
 
+		$type = '';
+
 		if(count($tire) > 0) {
 			$tire_data['tire_brand_name'] = $tire->brand_name;
 			$tire_data['tire_size'] = $tire->size;
 			$tire_data['tire_description'] = $tire->description;
 			$tire_data['tire_model'] = $tire->model;
+			$type = 'tire';
 		} else if(count($rim) > 0) {
 			$rim_data['rim_material'] = $rim->material;
 			$rim_data['rim_size'] = $rim->size;
 			$rim_data['rim_bolt_pattern'] = $rim->bolt_pattern;
+			$type = 'rim';
 		}
 
 		return View::make('products.edit', array(
 			'tire_data' => $tire_data,
 			'rim_data' => $rim_data,
+			'type' => $type,
 		))
 			->with('product', $product);
 	}
@@ -158,7 +163,7 @@ class ProductController extends \BaseController {
 		$product = Product::find($id);
 		$tires = $product->tires();
 		$rims = $product->rims();
-		$images = $product->product_images();
+		$images = $product->images();
 
 		foreach($tires as $tire) {
 			$tire->delete();

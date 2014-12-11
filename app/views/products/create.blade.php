@@ -4,73 +4,107 @@ Create Product
 @stop
 @section('content')
 
-  {{ Form::open(array('url' => 'products', 'method' => 'POST', 'files' => true)) }}
-    <ul>
+  <div class="col-sm-offset-8 col-sm-12">
+    <p>{{ link_to('products/', 'Back to Products') }}</p>
+  </div>
+  {{ Form::open(array('url' => 'products', 'method' => 'POST', 'files' => true, 'role' => 'form', 'class' => 'form-horizontal')) }}
+
+    <div class="col-sm-12">
       @if ($errors->has())
-
-      @foreach ($errors->all() as $error)
-      <li>{{ $error }}</li>
-      @endforeach
-
+      <div class="alert alert-danger" role="alert">
+        @foreach ($errors->all() as $error)
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{ $error }}
+        <br/>
+        @endforeach
+      </div>
       @endif
-    </ul>
-    <div>
-      {{ Form::file('images[]', array('multiple'=>true)) }}
-    </div>
-    <div>
-      {{ Form::label('price', 'Price') }}
-      {{ Form::text('price') }}
-    </div>
-    <div>
-      {{ Form::label('original_price', 'Original Price') }}
-      {{ Form::text('original_price') }}
-    </div>
-    <div>
-      {{ Form::label('quantity', 'Quantity') }}
-      {{ Form::text('quantity') }}
-    </div>
-    <div>
-      {{ Form::label('type', 'Type') }}
-      {{ Form::select('type', array('tire' => 'Tire', 'rim' => 'Rim')) }}
     </div>
 
-    <div class="tire">
+    <div class="form-group">
+      {{ Form::label('images', 'Add Images', array('class'=>'col-sm-2 control-label')) }}
+      <div class="col-sm-8">
+        {{ Form::file('images[]', array('multiple'=>true)) }}
+      </div>
+    </div>
+    <div class="form-group">
+      {{ Form::label('price', 'Price', array('class'=>'col-sm-2 control-label')) }}
+      <div class="col-sm-8">
+        {{ Form::text('price', null, array('class'=>'form-control')) }}
+      </div>
+    </div>
+    <div class="form-group">
+      {{ Form::label('original_price', 'Original Price', array('class'=>'col-sm-2 control-label')) }}
+      <div class="col-sm-8">
+        {{ Form::text('original_price', null, array('class'=>'form-control')) }}
+      </div>
+    </div>
+    <div class="form-group">
+      {{ Form::label('quantity', 'Quantity', array('class'=>'col-sm-2 control-label')) }}
+      <div class="col-sm-8">
+        {{ Form::text('quantity', null, array('class'=>'form-control')) }}
+      </div>
+    </div>
+    <div class="form-group">
+      {{ Form::label('type', 'Type', array('class'=>'col-sm-2 control-label')) }}
+      <div class="col-sm-8">
+        {{ Form::select('type', array('tire' => 'Tire', 'rim' => 'Rim'), null, array('class'=>'form-control')) }}
+      </div>
+    </div>
+
+    <div class="tire container-fluid">
       <h3>Tire</h3>
-      <div>
-        {{ Form::label('tire_size', 'Size') }}
-        {{ Form::text('tire_size') }}
+      <div class="form-group">
+        {{ Form::label('tire_size', 'Size', array('class'=>'col-sm-2 control-label')) }}
+        <div class="col-sm-8">
+          {{ Form::text('tire_size', null, array('class'=>'form-control')) }}
+        </div>
       </div>
-      <div>
-        {{ Form::label('tire_brand_name', 'Brand Name') }}
-        {{ Form::text('tire_brand_name') }}
+      <div class="form-group">
+        {{ Form::label('tire_brand_name', 'Brand Name', array('class'=>'col-sm-2 control-label')) }}
+        <div class="col-sm-8">
+          {{ Form::text('tire_brand_name', null, array('class'=>'form-control')) }}
+        </div>
       </div>
-      <div>
-        {{ Form::label('tire_description', 'Description') }}
-        {{ Form::textarea('tire_description') }}
+      <div class="form-group">
+        {{ Form::label('tire_description', 'Description', array('class'=>'col-sm-2 control-label')) }}
+        <div class="col-sm-8">
+          {{ Form::textarea('tire_description', null, array('class'=>'form-control')) }}
+        </div>
       </div>
-      <div>
-        {{ Form::label('tire_model', 'Model') }}
-        {{ Form::text('tire_model') }}
+      <div class="form-group">
+        {{ Form::label('tire_model', 'Model', array('class'=>'col-sm-2 control-label')) }}
+        <div class="col-sm-8">
+          {{ Form::text('tire_model', null, array('class'=>'form-control')) }}
+        </div>
       </div>
     </div>
-    <div class="rim">
+    <div class="rim container-fluid">
       <h3>Rim</h3>
-      <div>
-        {{ Form::label('rim_material', 'Material') }}
-        {{ Form::text('rim_material') }}
+      <div class="form-group">
+        {{ Form::label('rim_material', 'Material', array('class'=>'col-sm-2 control-label')) }}
+        <div class="col-sm-8">
+          {{ Form::text('rim_material', null, array('class'=>'form-control')) }}
+        </div>
       </div>
-      <div>
-        {{ Form::label('rim_bolt_pattern', 'Bolt Pattern') }}
-        {{ Form::text('rim_bolt_pattern') }}
+      <div class="form-group">
+        {{ Form::label('rim_bolt_pattern', 'Bolt Pattern', array('class'=>'col-sm-2 control-label')) }}
+        <div class="col-sm-8">
+          {{ Form::text('rim_bolt_pattern', null, array('class'=>'form-control')) }}
+        </div>
       </div>
-      <div>
-        {{ Form::label('rim_size', 'Size') }}
-        {{ Form::text('rim_size') }}
+      <div class="form-group">
+        {{ Form::label('rim_size', 'Size', array('class'=>'col-sm-2 control-label')) }}
+        <div class="col-sm-8">
+          {{ Form::text('rim_size', null, array('class'=>'form-control')) }}
+        </div>
       </div>
     </div>
-    <div>
-      {{ Form::submit('Submit') }}
+    <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-4">
+        {{ Form::submit('Create Product', array('class'=>'form-control')) }}
+      </div>
     </div>
   {{ Form::close() }}
-  <p>{{ link_to('products/', 'Back to Products') }}</p>
 @stop
