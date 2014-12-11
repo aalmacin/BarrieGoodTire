@@ -5,12 +5,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/custom.css') }}"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <div id="adminbody">
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-pills">
           <li role="presentation">{{ link_to('admin', 'Admin') }}</li>
           <li role="presentation">{{ link_to('products', 'Products') }}</li>
           <li role="presentation">{{ link_to('logout', 'Logout') }}</li>
