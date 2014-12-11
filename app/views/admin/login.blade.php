@@ -7,10 +7,8 @@ Administrator Login
     <div class="col-sm-offset-2 col-sm-10">
       <h1>Login</h1>
     </div>
-    <p>
-      {{ $errors->first('username') }}
-      {{ $errors->first('password') }}
-    </p>
+    
+    @include('includes.general.errors', array('errors' => $errors))
 
     <div class="form-group">
       {{ Form::label('username', 'Username: ', array('class'=>'col-sm-2 control-label')) }}

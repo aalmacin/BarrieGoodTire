@@ -13,6 +13,10 @@
 
 Route::get('/', array('uses'=>'HomeController@index'));
 
+Route::get('store', array('uses' => 'HomeController@store'));
+
+Route::get('store/{category}', array('uses' => 'HomeController@storeCategory'));
+
 Route::get('login', array('uses' => 'AdminController@showLogin'));
 
 Route::post('login', array('before' => 'csrf', 'uses' => 'AdminController@doLogin'));

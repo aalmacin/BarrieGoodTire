@@ -132,6 +132,42 @@ class Product extends Eloquent {
     return $this->hasMany('ProductImage');
   }
 
+  /**
+  * Getting the rim and tire data
+  */
+  public static function getTireData($tire) {
+    $tire_data = array();
+
+    $tire_data['tire_brand_name'] = '';
+    $tire_data['tire_size'] = '';
+    $tire_data['tire_description'] = '';
+    $tire_data['tire_model'] = '';
+
+
+    if(count($tire) > 0) {
+      $tire_data['tire_brand_name'] = $tire->brand_name;
+      $tire_data['tire_size'] = $tire->size;
+      $tire_data['tire_description'] = $tire->description;
+      $tire_data['tire_model'] = $tire->model;
+    }
+
+    return $tire_data;
+  }
+
+  public static function getRimData($rim) {
+    $rim_data = array();
+    $rim_data['rim_material'] = '';
+    $rim_data['rim_size'] = '';
+    $rim_data['rim_bolt_pattern'] = '';
+
+    if(count($rim) > 0) {
+      $rim_data['rim_material'] = $rim->material;
+      $rim_data['rim_size'] = $rim->size;
+      $rim_data['rim_bolt_pattern'] = $rim->bolt_pattern;
+    }
+
+    return $rim_data;
+  }
 
   /**
   * Default rules for all validations

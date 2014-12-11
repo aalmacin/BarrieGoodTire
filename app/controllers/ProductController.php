@@ -38,7 +38,13 @@ class ProductController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('products.create');
+		$tire_data = Product::getTireData(null);
+		$rim_data = Product::getRimData(null);
+		return View::make('products.create', array(
+			'product' => null,
+			'tire_data' => $tire_data,
+			'rim_data' => $rim_data,
+		));
 	}
 
 
@@ -90,33 +96,21 @@ class ProductController extends \BaseController {
 	public function edit($id)
 	{
 		$product = Product::find($id);
-		$rim_data = array();
-		$tire_data = array();
 
-		$tire_data['tire_brand_name'] = '';
-		$tire_data['tire_size'] = '';
-		$tire_data['tire_description'] = '';
-		$tire_data['tire_model'] = '';
-		$rim_data['rim_material'] = '';
-		$rim_data['rim_size'] = '';
-		$rim_data['rim_bolt_pattern'] = '';
 
 		if($product == null) App::abort('404');
 		$tire = $product->tires()->first();
 		$rim = $product->rims()->first();
 
+
+		$tire_data = Product::getTireData($tire);
+		$rim_data = Product::getRimData($rim);
+
 		$type = '';
 
 		if(count($tire) > 0) {
-			$tire_data['tire_brand_name'] = $tire->brand_name;
-			$tire_data['tire_size'] = $tire->size;
-			$tire_data['tire_description'] = $tire->description;
-			$tire_data['tire_model'] = $tire->model;
 			$type = 'tire';
 		} else if(count($rim) > 0) {
-			$rim_data['rim_material'] = $rim->material;
-			$rim_data['rim_size'] = $rim->size;
-			$rim_data['rim_bolt_pattern'] = $rim->bolt_pattern;
 			$type = 'rim';
 		}
 
