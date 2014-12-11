@@ -8,7 +8,8 @@
     <div class="caption">
       <h4>${{ $rim['price'] }} or best offer</h4>
       <h4>{{ link_to('details/'.$rim['id'], 'More Details') }}</h4>
-      <p>Material {{ $rim['material'] }}</p>
+      <p>Material: {{ $rim['material'] }}</p>
+      <p>Type: Rim</p>
     </div>
   </div>
 </div>

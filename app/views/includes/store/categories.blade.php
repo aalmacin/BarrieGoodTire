@@ -3,6 +3,5 @@
 @elseif($category == 'rims')
   @include('includes.store.rims', array('products' => $products))
 @else
-  @include('includes.store.tires', array('products' => $products))
-  @include('includes.store.rims', array('products' => $products))
+  @include('includes.store.all', array('products' => $products))
 @endif
