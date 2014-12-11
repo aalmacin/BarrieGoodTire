@@ -17,6 +17,8 @@ Route::get('store', array('uses' => 'HomeController@store'));
 
 Route::get('store/{category}', array('uses' => 'HomeController@storeCategory'));
 
+Route::get('details/{id}', array('uses' => 'HomeController@details'));
+
 Route::get('login', array('uses' => 'AdminController@showLogin'));
 
 Route::post('login', array('before' => 'csrf', 'uses' => 'AdminController@doLogin'));

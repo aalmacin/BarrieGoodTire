@@ -23,6 +23,17 @@ class HomeController extends BaseController {
 		));
 	}
 
+	public function details($id)
+	{
+		$product = Product::findProduct($id);
+		$product_images = Product::find($id)->images()->getResults();
+
+		return View::make('details', array(
+			'product' => $product,
+			'images' => $product_images,
+		));
+	}
+
 	public function store()
 	{
 		return $this->storeCategory('all');
