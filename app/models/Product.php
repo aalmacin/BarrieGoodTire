@@ -276,13 +276,13 @@ class Product extends Eloquent {
 
     switch($type) {
       case 'thumb':
-      $thumb_width = $img->width() / 4;
-      $thumb_height = $img->height() / 4;
+      $thumb_width = 160;
+      $thumb_height = 212;
       $img->resize($thumb_width, $thumb_height);
       break;
       case 'image':
-      $width = $img->width() / 2;
-      $height = $img->height() / 2;
+      $width = 320;
+      $height = 424;
       $img->resize($width, $height);
       break;
     }

@@ -3,7 +3,5 @@
 Store
 @stop
 @section('content')
-  @if($all_results)
-    @include('includes.store.tires', array('products' => $products))
-  @endif
+  @include('includes.store.categories', array('products' => $products))
 @stop

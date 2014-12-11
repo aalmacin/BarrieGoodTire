@@ -17,7 +17,10 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-		return View::make('index');
+		return View::make('index', array(
+			'products' => Product::scopeAllProducts(),
+			'category' => 'all',
+		));
 	}
 
 	public function store()
@@ -30,19 +33,17 @@ class HomeController extends BaseController {
 		$all = Product::scopeAllProducts();
 		if($category == 'all') {
 			$products = $all;
-			$allResults = true;
 		} else {
 			if(isset($all[$category]) && count($all[$category]) > 0) {
-				$products = $all[$category];
-				$allResults = false;
+				$products = array($category => $all[$category]);
 			} else {
 				$products = $all;
-				$allResults = true;
+				$category = 'all';
 			}
 		}
 		return View::make('store', array(
 			'products' => $products,
-			'all_results' => $allResults,
+			'category' => $category,
 		));
 	}
 

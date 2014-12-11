@@ -1,4 +1,4 @@
-<div class="col-sm-4 col-lg-4 col-md-4">
+<div class="col-sm-2 col-lg-2 col-md-2">
   <div class="thumbnail">
     @if(count($tire['images']) > 0)
       <a href="details/{{ $tire['id'] }}" target="_blank">{{ HTML::image(asset($tire['images'][0]['thumb'])) }}</a>

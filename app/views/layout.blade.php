@@ -14,6 +14,9 @@
       <div class="page-header">
         <h1>Barrie Good Tire</h1>
       </div>
+      <div class="well row">
+        <p>To place an order, email <a href="mailto:julien@barriegoodtire.com">julien@barriegoodtire.com</a> or call <a href="tel:17057171034">705-717-1034</a></p>
+      </div>
       <div class="row">
         <div class="col-sm-3">
           <div class="sidebar-nav">
