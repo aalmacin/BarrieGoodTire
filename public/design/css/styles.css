@@ -1,5 +1,9 @@
 #adminbody { padding-top: 30px; }
 
+#all-products .thumbnail {
+  min-height: 400px;
+}
+
 .price {
   color: #B0171F;
 }
