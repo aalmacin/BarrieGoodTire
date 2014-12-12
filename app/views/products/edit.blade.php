@@ -4,7 +4,7 @@ Edit Product
 @stop
 @section('content')
 
-<div class="col-sm-offset-8 col-sm-12">
+<div class="col-sm-offset-8 col-sm-2">
   {{ link_to('products/', 'Back to Products') }}
 </div>
 

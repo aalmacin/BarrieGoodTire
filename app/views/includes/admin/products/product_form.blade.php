@@ -37,12 +37,14 @@
   <div class="form-group">
     {{ Form::label('type', 'Type', array('class'=>'col-sm-2 control-label')) }}
     <div class="col-sm-8">
-      {{ Form::select('type', array('tire' => 'Tire', 'rim' => 'Rim'), $type, array('class'=>'form-control')) }}
+      {{ Form::select('type', array('tire' => 'Tire', 'rim' => 'Rim'), $product_type, array('class'=>'form-control', 'id' => 'type-selector')) }}
     </div>
   </div>
-
-  <div class="tire container-fluid">
-    <h3>Tire</h3>
+  <hr>
+  <div id="tire-data">
+    <div class="container-fluid col-sm-offset-2 col-sm-10">
+      <h3 class="text-capitalize">Tire Info</h3>
+    </div>
     <div class="form-group">
       {{ Form::label('tire_size', 'Size', array('class'=>'col-sm-2 control-label')) }}
       <div class="col-sm-8">
@@ -68,8 +70,10 @@
       </div>
     </div>
   </div>
-  <div class="rim container-fluid">
-    <h3>Rim</h3>
+  <div id="rim-data">
+    <div class="container-fluid col-sm-offset-2 col-sm-10">
+      <h3 class="text-capitalize">Rim Info</h3>
+    </div>
     <div class="form-group">
       {{ Form::label('rim_material', 'Material', array('class'=>'col-sm-2 control-label')) }}
       <div class="col-sm-8">

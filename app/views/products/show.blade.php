@@ -4,13 +4,13 @@ Product
 @stop
 @section('content')
 
-<div class="col-sm-offset-8 col-sm-12">
+<div class="col-sm-offset-8 col-sm-2">
   {{ link_to('products/', 'Back to Products') }}
 </div>
 
 <div class="container-fluid">
   @include('includes.admin.products.image_thumbnails', array('images' => $images))
-  <div class="col-sm-offset-2 col-sm-12">
+  <div class="col-sm-offset-2 col-sm-10">
     @if($product['type'] == 'rim')
     <h2>Rim</h2>
     <p>Quantity: {{ $product['quantity'] }}</p>

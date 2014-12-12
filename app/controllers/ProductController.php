@@ -42,6 +42,7 @@ class ProductController extends \BaseController {
 		$rim_data = Product::getRimData(null);
 		return View::make('products.create', array(
 			'product' => null,
+			'product_type' => null,
 			'tire_data' => $tire_data,
 			'rim_data' => $rim_data,
 		));
@@ -117,7 +118,7 @@ class ProductController extends \BaseController {
 		return View::make('products.edit', array(
 			'tire_data' => $tire_data,
 			'rim_data' => $rim_data,
-			'type' => $type,
+			'product_type' => $type,
 		))
 			->with('product', $product);
 	}
