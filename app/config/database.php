@@ -56,7 +56,7 @@ return array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => 'main_barriegoodtire',
-			'username'  => 'main_barriegoodtire',
+			'username'  => 'main_root',
 			'password'  => 'a&f3f5W3ykKf+Xz',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
