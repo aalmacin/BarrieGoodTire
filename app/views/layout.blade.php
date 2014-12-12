@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>@yield('title') | Barrie Good Tire</title>
+    <title>@yield('title') - Barrie Good Tire</title>
+    <meta name='description' content="@yield('description')">
 
     @include('includes.general.header')
     <link rel="stylesheet" href="{{ asset('design/css/vertical-sidebar.css') }}">

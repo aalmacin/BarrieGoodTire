@@ -2,6 +2,10 @@
 @section('title')
 Product Details
 @stop
+@section('description')
+Detail page of the car part. All relevant information are displayed.
+If you think this is the part you are looking for, contact us now.
+@stop
 @section('content')
 
 <div class="container-fluid">
