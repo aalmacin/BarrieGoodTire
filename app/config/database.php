@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'main_barriegoodtire',
 			'username'  => 'main_root',
-			'password'  => 'a&f3f5W3ykKf+Xz',
+			'password'  => '0EhqQQeo~#f_rz%^',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
