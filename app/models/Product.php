@@ -288,7 +288,7 @@ class Product extends Eloquent {
     }
 
     $destination = $destinationPath.$hash_name;
-    $wholePath = "/home/main/barrie-good-tire/public/$destination";
+    $wholePath = base_path()."/public/$destination";
     // Save Image
     $img->save($wholePath);
     return $destination;
