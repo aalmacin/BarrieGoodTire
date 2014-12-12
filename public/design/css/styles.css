@@ -1,0 +1,9 @@
+#adminbody { padding-top: 30px; }
+
+.price {
+  color: #B0171F;
+}
+
+#productCarousel .item img {
+  margin: auto;
+}
