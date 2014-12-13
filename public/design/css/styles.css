@@ -1,7 +1,9 @@
 #adminbody { padding-top: 30px; }
 
 #all-products .thumbnail {
-  min-height: 400px;
+  min-height: 500px;
+  max-height: 500px;
+  overflow: scroll;
 }
 
 .price {
