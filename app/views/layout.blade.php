@@ -3,6 +3,10 @@
   <head>
     <title>@yield('title') - Barrie Good Tire</title>
     <meta name='description' content="@yield('description')">
+    <meta property='og:title' content="@yield('title') - Barrie Good Tire">
+    <meta property='og:description' content="@yield('description')">
+    <meta property='og:site_name' content="Barrie Good Tire">
+    <meta property='og:url' content="http://www.barriegoodtire.com">
 
     @include('includes.general.header')
     <link rel="stylesheet" href="{{ asset('design/css/vertical-sidebar.css') }}">
